@@ -12,7 +12,7 @@ module Ressources
 		readonly attribute long step; 
 
 		void pretype(in RessourceType type);
-		void generate(in long count);
+		void generate();
 		boolean acquire(in long count);
 	};
 };

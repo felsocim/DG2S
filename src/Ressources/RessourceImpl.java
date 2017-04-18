@@ -1,18 +1,22 @@
 package Ressources;
 
 import java.util.Timer;
-import org.omg.CORBA.*;
+import java.util.TimerTask;
 
 public class RessourceImpl extends _RessourceImplBase
 {
     private RessourceType type;
     private int count;
     private int step;
-    private Timer generator;
+    private int refillFrequence;
 
-    public RessourceImpl(RessourceType type, int count, int step)
+    public RessourceImpl(RessourceType type, int count, int step, int refillFrequence)
     {
-        
+        super();
+        this.type = type;
+        this.count = count;
+        this.step = step;
+        this.refillFrequence = refillFrequence;
     }
 
     public RessourceType type ()
@@ -30,18 +34,25 @@ public class RessourceImpl extends _RessourceImplBase
         return this.step;
     }
 
+    public int refillFrequence()
+    {
+        return this.refillFrequence;
+    }
+
     public void pretype (RessourceType type)
     {
         this.type = type;
     }
 
-    public void generate (int count)
+    public void generate ()
     {
-
+        count += (count / 2) + 5;
+        System.out.println("New ressource generated");
     }
 
     public synchronized boolean acquire (int count)
     {
+        System.out.println("count: " + count + " step: " + this.step + " pcount: " + this.count);
         if (count <= this.step && count <= this.count)
         {
             this.count -= count;
