@@ -1,15 +1,17 @@
-module Ressources
+module Producers
 {
 	enum RessourceType 
 	{
 		WOOD, MARBLE, WINE, CRYSTAL, BRIMSTONE
 	};
 
-	interface Ressource
+	interface RemoteProducer
 	{
 		readonly attribute RessourceType type;
+		readonly attribute long id;
 		readonly attribute long count;
-		readonly attribute long step; 
+		readonly attribute long step;
+		readonly attribute long refillFrequence; 
 
 		void pretype(in RessourceType type);
 		void generate();

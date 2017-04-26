@@ -1,0 +1,45 @@
+module Consumers
+{
+    interface RessourceHolder
+    {
+        readonly attribute long resWood;
+        readonly attribute long resMarble;
+        readonly attribute long resWine;
+        readonly attribute long resCrystal;
+        readonly attribute long resBrimstone;
+
+        void setWood(in long units);
+        void setMarble(in long units);
+        void setWine(in long units);
+        void setCrystal(in long units);
+        void setBrimstone(in long units);
+        void setAll(in long uWood, in long uMarble, in long uWine, in long uCrytsal, in long uBrimstone);
+
+        long compare(in RessourceHolder toBeCompared);
+        RessourceHolder add(in RessourceHolder operand);
+        RessourceHolder addExplicit(in long uWood, in long uMarble, in long uWine, in long uCrytsal, in long uBrimstone);
+
+        string toString();
+    };
+
+    interface RemoteConsumer
+    {
+        readonly attribute string idConsumer;
+        readonly attribute boolean readyToGo;
+        readonly attribute boolean manualMode;
+        readonly attribute RessourceHolder resCurrent;
+        readonly attribute RessourceHolder resTarget;
+        readonly attribute boolean gameOver;
+
+        void setIdConsumer(in string id);
+        void setReadyToGo(in boolean status);
+        void setManualMode(in boolean mode);
+        void setResCurrent(in RessourceHolder current);
+        void setResTarget(in RessourceHolder target);
+        void setGameOver(in boolean over);
+
+        RessourceHolder updateRessources(in RessourceHolder acquired);
+
+        string toString();
+    };
+};

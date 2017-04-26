@@ -1,18 +1,17 @@
-package Ressources;
+package Producers;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class RessourceImpl extends _RessourceImplBase
+public class RemoteProducerImpl extends _RemoteProducerImplBase
 {
     private RessourceType type;
+    private int id;
     private int count;
     private int step;
     private int refillFrequence;
 
-    public RessourceImpl(RessourceType type, int count, int step, int refillFrequence)
+    public RemoteProducerImpl(RessourceType type, int id, int count, int step, int refillFrequence)
     {
         super();
+        this.id = id;
         this.type = type;
         this.count = count;
         this.step = step;
@@ -24,7 +23,12 @@ public class RessourceImpl extends _RessourceImplBase
         return this.type;
     }
 
-    public int count ()
+    public int id ()
+    {
+        return this.id;
+    }
+
+    public synchronized int count ()
     {
         return this.count;
     }
@@ -44,10 +48,10 @@ public class RessourceImpl extends _RessourceImplBase
         this.type = type;
     }
 
-    public void generate ()
+    public synchronized void generate ()
     {
-        count += (count / 2) + 5;
-        System.out.println("New ressource generated");
+        count += (count / 2) + 1;
+        System.out.println("New " + type.toString() + " generated for producer " + id + " (now wood: " + count + " )");
     }
 
     public synchronized boolean acquire (int count)
