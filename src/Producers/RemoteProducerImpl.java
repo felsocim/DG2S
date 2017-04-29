@@ -7,22 +7,24 @@ public class RemoteProducerImpl extends _RemoteProducerImplBase {
     private int step;
     private int refillFrequence;
     private boolean readyToGo;
+    private boolean infiniteRessources;
 
-    public RemoteProducerImpl(RessourceType type, int id, int count, int step, int refillFrequence) {
+    public RemoteProducerImpl(RessourceType type, int id, int count, int step, int refillFrequence, boolean infiniteRessources) {
         super();
         this.id = id;
         this.type = type;
         this.count = count;
         this.step = step;
         this.refillFrequence = refillFrequence;
-        this.readyToGo = true;
+        this.readyToGo = false;
+        this.infiniteRessources = infiniteRessources;
     }
 
-    public RessourceType type() {
+    public synchronized RessourceType type() {
         return this.type;
     }
 
-    public int id() {
+    public synchronized int id() {
         return this.id;
     }
 
@@ -30,32 +32,47 @@ public class RemoteProducerImpl extends _RemoteProducerImplBase {
         return this.count;
     }
 
-    public int step() {
+    public synchronized int step() {
         return this.step;
     }
 
-    public int refillFrequence() {
+    public synchronized int refillFrequence() {
         return this.refillFrequence;
     }
 
-    public boolean readyToGo() {
+    public synchronized boolean readyToGo() {
         return this.readyToGo;
     }
 
-    public void setReadyToGo(boolean status) {
+    public synchronized boolean infiniteRessources ()
+    {
+        return this.infiniteRessources;
+    }
+
+    public synchronized void setInfiniteRessources (boolean property)
+    {
+        this.infiniteRessources = property;
+    }
+
+    public synchronized void setReadyToGo(boolean status) {
         this.readyToGo = status;
     }
 
-    public void pretype(RessourceType type) {
+    public synchronized void pretype(RessourceType type) {
         this.type = type;
     }
 
-    public synchronized void generate() {
-        if (this.readyToGo) {
-            this.count += (this.count / 2) + 1;
-            System.out.println("New " + this.type.toString() + " generated for producer " + this.id + " (now " + this.type.toString() + ": " + this.count + " )");
+    public synchronized void generate()
+    {
+        if (this.readyToGo)
+        {
+            if(!this.infiniteRessources)
+            {
+                this.count += (this.count / 2) + 1;
+                System.out.println("New " + this.type.toString() + " generated for producer " + this.id + " (now " + this.type.toString() + ": " + this.count + " )");
 
-            return;
+                return;
+            }
         }
 
         System.out.println(type.toString() + " producer " + id + " is not ready yet.");
@@ -75,26 +92,39 @@ public class RemoteProducerImpl extends _RemoteProducerImplBase {
                 }
                 else
                 {
-                    toBeAcquired = ( (units > 5 ) ? (units / 5) : 1 );
+                    toBeAcquired = ( (units > 3 ) ? (units / 3) : 1 );
                 }
                 break;
             default:
                 toBeAcquired = units;
+                break;
         }
 
-        System.out.println("TBA1: " + toBeAcquired);
+        int actuallyAcquired;
 
-        if (toBeAcquired > this.count)
+        if(!this.infiniteRessources)
         {
-            toBeAcquired = this.count;
-        }
+            if (toBeAcquired > this.count)
+            {
+                toBeAcquired = this.count;
+            }
 
-        System.out.println("TBA2: " + toBeAcquired);
-        //System.out.println("init2: " + init);
-        this.count -= toBeAcquired;
-        int actuallyAcquired = init - this.count;
-        System.out.println("acquire: " + units + " wanted, "  + actuallyAcquired + " actually acquired, " + this.count + " remaining");
+            this.count -= toBeAcquired;
+
+            actuallyAcquired = init - this.count;
+
+            System.out.println("acquire: " + units + " wanted, "  + actuallyAcquired + " actually acquired, " + this.count + " remaining");
+        }
+        else
+        {
+            actuallyAcquired = toBeAcquired;
+        }
 
         return actuallyAcquired;
+    }
+
+    public synchronized String _toString()
+    {
+        return (this.type.toString() + " producer " + this.id + " with " + this.count + " remaining ressource units. Infinite ressources " + this.infiniteRessources);
     }
 }

@@ -2,7 +2,7 @@ module Producers
 {
 	enum RessourceType 
 	{
-		WOOD, MARBLE, WINE, CRYSTAL, BRIMSTONE
+		WOOD, MARBLE, CRYSTAL
 	};
 
 	interface RemoteProducer
@@ -13,11 +13,15 @@ module Producers
 		readonly attribute long step;
 		readonly attribute long refillFrequence;
 		readonly attribute boolean readyToGo;
+		readonly attribute boolean infiniteRessources;
 
 		void setReadyToGo(in boolean status);
+		void setInfiniteRessources(in boolean property);
 
 		void pretype(in RessourceType type);
 		void generate();
 		long acquire(in long units, in char personality);
+
+		string toString();
 	};
 };

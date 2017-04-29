@@ -14,16 +14,19 @@ public class Producer
 {
     public static void main(String[] args)
     {
-        if(args.length != 4)
+        if(args.length != 6)
         {
-            System.out.println("Invalid argument entry! (Usage: java Producer <RESSOURCE TYPE> <INIT RES COUNT> <MAX ACQUIRE STEP> <REFILL FREQUENCE>");
+            System.out.println("Invalid argument entry! (Usage: java Producer <PRODUCER ID> <RESSOURCE TYPE> <INIT RES COUNT> <MAX ACQUIRE STEP> <REFILL FREQUENCE> <INFINITE RESSOURCES>");
             System.exit(-1);
         }
 
-        Random random = new Random();
-        int id = random.nextInt(1000);
+        int id = Integer.parseInt(args[0]);
+        String strResType = args[1].replaceAll(" ", "").toUpperCase();
+        int initCount = Integer.parseInt(args[2]);
+        int maxStep = Integer.parseInt(args[3]);
+        int refillFreq = Integer.parseInt(args[4]);
+        boolean infiniteRessources = (args[5].charAt(0) == 'i');
 
-        String strResType = args[0].replaceAll(" ", "").toUpperCase();
         RessourceType resType;
 
         switch(strResType)
@@ -34,59 +37,58 @@ public class Producer
             case "MARBLE":
                 resType = RessourceType.MARBLE;
                 break;
-            case "WINE":
-                resType = RessourceType.WINE;
-                break;
             case "CRYSTAL":
                 resType = RessourceType.CRYSTAL;
-                break;
-            case "BRIMSTONE":
-                resType = RessourceType.BRIMSTONE;
                 break;
             default:
                 resType = RessourceType.WOOD;
                 break;
         }
 
-        int initCount = Integer.parseInt(args[1]);
-        int maxStep = Integer.parseInt(args[2]);
-        int refillFreq = Integer.parseInt(args[3]);
-
         try
         {
             ORB corba = ORB.init(args, null);
 
-            RemoteProducerImpl ressource = new RemoteProducerImpl(resType, id, initCount, maxStep, refillFreq);
+            RemoteProducerImpl ressource = new RemoteProducerImpl(resType, id, initCount, maxStep, refillFreq, infiniteRessources);
 
             String ior = corba.object_to_string(ressource);
 
-            FileWriter fileWriter = new FileWriter("Producers_of_" + resType.toString() + ".res", true);
-            PrintWriter ior_writer = new PrintWriter(fileWriter);
-            ior_writer.println(ior);
-            ior_writer.close();
+            try
+            {
+                FileWriter fileWriter = new FileWriter(resType.toString().toLowerCase() + "_producers.drg", true);
+                PrintWriter ior_writer = new PrintWriter(fileWriter);
+                ior_writer.println(ior);
+                ior_writer.close();
+            }
+            catch (FileNotFoundException error404)
+            {
+                System.out.println("Unable to write down producer " + ressource.id() + " IOR!");
+                System.exit(-1);
+            }
+            catch (IOException inputOutputException)
+            {
+                System.out.println("I/O error encountered while writing down producer " + ressource.id() + " IOR!");
+                System.exit(-1);
+            }
 
-            Timer refiller = new Timer();
-            refiller.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    ressource.generate();
-                }
-            }, 30000, ressource.refillFrequence());
+            if(!ressource.infiniteRessources())
+            {
+                Timer refiller = new Timer();
+                refiller.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        ressource.generate();
+                    }
+                }, 30000, ressource.refillFrequence());
+            }
 
-            System.out.println(resType.toString() + " producer initialized.");
+            System.out.println(resType.toString() + " producer " + ressource.id() + " initialized.");
+
+            corba.run();
         }
         catch (SystemException sys_e)
         {
             sys_e.printStackTrace();
-        }
-        catch (FileNotFoundException fnf_e)
-        {
-            System.out.println("Unable to write down IOR!");
-            System.exit(-1);
-        }
-        catch (IOException ioex)
-        {
-            ioex.printStackTrace();
         }
     }
 }

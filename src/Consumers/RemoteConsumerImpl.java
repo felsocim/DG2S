@@ -1,29 +1,31 @@
 package Consumers;
 
-import java.util.Random;
-
 public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 {
     private String idConsumer;
     private boolean readyToGo;
+    private boolean myTurn;
+    private boolean inObservation;
     private boolean manualMode;
     private VectorRessource resCurrent;
     private VectorRessource resTarget;
     private char personality;
     private boolean gameOver;
 
-    public RemoteConsumerImpl(String id, boolean manual, VectorRessource target, char personality)
+    public RemoteConsumerImpl(String id, boolean inObservation, boolean manual, VectorRessource target, char personality)
     {
         this.idConsumer = id;
         this.readyToGo = false;
+        this.myTurn = !manual;
+        this.inObservation = inObservation;
         this.manualMode = manual;
-        this.resCurrent = new VectorRessourceImpl(0, 0, 0, 0, 0);
+        this.resCurrent = new VectorRessourceImpl(0, 0, 0);
         this.resTarget = target;
         this.personality = personality;
         this.gameOver = false;
     }
 
-    public String idConsumer ()
+    public synchronized String idConsumer ()
     {
         return this.idConsumer;
     }
@@ -33,7 +35,17 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         return this.readyToGo;
     }
 
-    public boolean manualMode ()
+    public synchronized boolean myTurn ()
+    {
+        return this.myTurn;
+    }
+
+    public synchronized boolean inObservation ()
+    {
+        return this.inObservation;
+    }
+
+    public synchronized boolean manualMode ()
     {
         return this.manualMode;
     }
@@ -48,17 +60,17 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         return this.resTarget;
     }
 
-    public char personality()
+    public synchronized char personality()
     {
         return this.personality;
     }
 
-    public boolean gameOver ()
+    public synchronized boolean gameOver ()
     {
         return this.gameOver;
     }
 
-    public void setIdConsumer (String id)
+    public synchronized void setIdConsumer (String id)
     {
         this.idConsumer = id;
     }
@@ -68,7 +80,17 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         this.readyToGo = status;
     }
 
-    public void setManualMode (boolean mode)
+    public synchronized void setMyTurn (boolean go)
+    {
+        this.myTurn = go;
+    }
+
+    public synchronized void setInObservation (boolean observation)
+    {
+        this.inObservation = observation;
+    }
+
+    public synchronized void setManualMode (boolean mode)
     {
         this.manualMode = mode;
     }
@@ -83,12 +105,12 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         this.resTarget = target;
     }
 
-    public void setPersonality(char personality)
+    public synchronized void setPersonality(char personality)
     {
         this.personality = personality;
     }
 
-    public void setGameOver (boolean over)
+    public synchronized void setGameOver (boolean over)
     {
         this.gameOver = over;
     }
@@ -98,7 +120,7 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         this.resCurrent.add(acquired);
     }
 
-    public boolean finished()
+    public synchronized boolean finished()
     {
         if(this.resTarget().compare(this.resCurrent))
         {
@@ -112,6 +134,6 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized String _toString ()
     {
-        return ("CLIENT:\nIdentificator: " + this.idConsumer + "\nCurrent ressources status: " + this.resCurrent._toString() + "\nTarget ressources status: " + this.resTarget._toString() );
+        return (this.idConsumer + "\nCurrent ressources status: " + this.resCurrent._toString() + "\nTarget ressources status: " + this.resTarget._toString() );
     }
 }

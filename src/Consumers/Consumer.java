@@ -4,11 +4,9 @@ import Producers.RemoteProducer;
 import Producers.RemoteProducerHelper;
 import Producers.RessourceType;
 import org.omg.CORBA.*;
-import org.omg.CORBA.Object;
 
 import java.io.*;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class Consumer
 {
@@ -18,7 +16,7 @@ public class Consumer
 
         try
         {
-            FileReader fileReader = new FileReader("Producers_of_" + ressourceType.toString() + ".res");
+            FileReader fileReader = new FileReader(ressourceType.toString().toLowerCase() + "_producers.drg");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String current;
@@ -32,7 +30,8 @@ public class Consumer
         }
         catch (IOException ioException)
         {
-            System.out.println("Unable to discover " + ressourceType.toString() + " producers!");
+            System.out.println("Unable to discover " + ressourceType.toString().toLowerCase() + " producers!");
+            System.exit(12);
         }
 
         return producers;
@@ -42,26 +41,26 @@ public class Consumer
     {
         if(args.length != 7)
         {
-            System.out.println("Incorrect argument(s)! Usage: java Consumer <CONSUMER ID> <TARGET WOOD> <TARGET MARBLE> <TARGET WINE> <TARGET CRYSTAL> <TARGET BRIMSTONE> <PERSONALITY>");
+            System.out.println("Incorrect argument(s)! Usage: java Consumer <CONSUMER ID> <TARGET WOOD> <TARGET MARBLE> <TARGET CRYSTAL> <PERSONALITY> <OBSERVE> <MANUAL MODE>");
+            System.exit(-1);
         }
 
         String id = args[0];
         int tgWood = Integer.parseInt(args[1]);
         int tgMarble = Integer.parseInt(args[2]);
-        int tgWine = Integer.parseInt(args[3]);
-        int tgCrystal = Integer.parseInt(args[4]);
-        int tgBrimstone = Integer.parseInt(args[5]);
-        char personality = args[6].charAt(0);
+        int tgCrystal = Integer.parseInt(args[3]);
+        char personality = args[4].charAt(0);
+        boolean inObservation = (args[5].charAt(0) == 'o');
+        boolean manualMode = (args[6].charAt(0) == 'm');
 
-        RemoteConsumerImpl consumer = new RemoteConsumerImpl(id, false, new VectorRessourceImpl(tgWood, tgMarble, tgWine, tgCrystal, tgBrimstone), personality);
+        RemoteConsumerImpl consumer = new RemoteConsumerImpl(id, inObservation, manualMode, new VectorRessourceImpl(tgWood, tgMarble, tgCrystal), personality);
 
         LinkedList<String> prodWoodIOR = loadProducers(RessourceType.WOOD);
         LinkedList<String> prodMarbleIOR = loadProducers(RessourceType.MARBLE);
-        LinkedList<String> prodWineIOR = loadProducers(RessourceType.WINE);
         LinkedList<String> prodCrystalIOR = loadProducers(RessourceType.CRYSTAL);
-        LinkedList<String> prodBrimstoneIOR = loadProducers(RessourceType.BRIMSTONE);
 
-        if(prodWoodIOR.size() < 1 || prodMarbleIOR.size() < 1 || prodWineIOR.size() < 1 || prodCrystalIOR.size() < 1 || prodBrimstoneIOR.size() < 1)
+
+        if(prodWoodIOR.size() < 1 || prodMarbleIOR.size() < 1 || prodCrystalIOR.size() < 1 )
         {
             System.out.println("Please, make sure there is at least one producer initialized per raw material!");
             System.exit(12);
@@ -75,7 +74,7 @@ public class Consumer
 
             try
             {
-                FileWriter fileWriter = new FileWriter("Consumers.cns", true);
+                FileWriter fileWriter = new FileWriter("consumers.drg", true);
                 PrintWriter consWriter = new PrintWriter(fileWriter);
                 consWriter.println(consumerIOR);
                 consWriter.close();
@@ -93,9 +92,7 @@ public class Consumer
 
             RemoteProducer[] prodWood = new RemoteProducer[prodWoodIOR.size()];
             RemoteProducer[] prodMarble = new RemoteProducer[prodMarbleIOR.size()];
-            RemoteProducer[] prodWine = new RemoteProducer[prodWineIOR.size()];
             RemoteProducer[] prodCrystal = new RemoteProducer[prodCrystalIOR.size()];
-            RemoteProducer[] prodBrimstone = new RemoteProducer[prodBrimstoneIOR.size()];
 
             for (int i = 0; i < prodWood.length; i++)
             {
@@ -107,53 +104,54 @@ public class Consumer
                 prodMarble[i] = RemoteProducerHelper.narrow(corba.string_to_object(prodMarbleIOR.get(i)));
             }
 
-            for (int i = 0; i < prodWine.length; i++)
-            {
-                prodWine[i] = RemoteProducerHelper.narrow(corba.string_to_object(prodWineIOR.get(i)));
-            }
-
             for (int i = 0; i < prodCrystal.length; i++)
             {
                 prodCrystal[i] = RemoteProducerHelper.narrow(corba.string_to_object(prodCrystalIOR.get(i)));
-            }
-
-            for (int i = 0; i < prodBrimstone.length; i++)
-            {
-                prodBrimstone[i] = RemoteProducerHelper.narrow(corba.string_to_object(prodBrimstoneIOR.get(i)));
             }
 
             System.out.println("Consumer " + consumer.idConsumer() + " initialized. Waiting for signal...");
 
             while (!consumer.finished())
             {
-                if(consumer.readyToGo())
+                if(consumer.readyToGo() && consumer.myTurn())
                 {
                     // WTF????
-                    VectorRessourceImpl acquired = new VectorRessourceImpl(0,0,0,0,0);
+                    VectorRessourceImpl acquired = new VectorRessourceImpl(0,0,0);
 
                     for (RemoteProducer woodProducer : prodWood)
                     {
-                        acquired.setWood(acquired.resWood() + woodProducer.acquire(tgWood - consumer.resCurrent().resWood(), consumer.personality()));
+                        int units = tgWood;
+
+                        if(consumer.inObservation())
+                        {
+                            units = tgWood - consumer.resCurrent().resWood();
+                        }
+
+                        acquired.setWood(acquired.resWood() + woodProducer.acquire(units, consumer.personality()));
                     }
 
                     for (RemoteProducer marbleProducer : prodMarble)
                     {
-                        acquired.setMarble(acquired.resMarble() + marbleProducer.acquire(tgMarble - consumer.resCurrent().resMarble(), consumer.personality()));
-                    }
+                        int units = tgMarble;
 
-                    for (RemoteProducer wineProducer : prodWine)
-                    {
-                        acquired.setWine(acquired.resWine() + wineProducer.acquire(tgWine - consumer.resCurrent().resWine(), consumer.personality()));
+                        if(consumer.inObservation())
+                        {
+                            units = tgMarble - consumer.resCurrent().resMarble();
+                        }
+
+                        acquired.setMarble(acquired.resMarble() + marbleProducer.acquire(units, consumer.personality()));
                     }
 
                     for (RemoteProducer crystalProducer : prodCrystal)
                     {
-                        acquired.setCrystal(acquired.resCrystal() + crystalProducer.acquire(tgCrystal - consumer.resCurrent().resCrystal(), consumer.personality()));
-                    }
+                        int units = tgCrystal;
 
-                    for (RemoteProducer brimstoneProducer : prodBrimstone)
-                    {
-                        acquired.setBrimstone(acquired.resBrimstone() + brimstoneProducer.acquire(tgBrimstone - consumer.resCurrent().resBrimstone(), consumer.personality()));
+                        if(consumer.inObservation())
+                        {
+                            units = tgCrystal - consumer.resCurrent().resCrystal();
+                        }
+
+                        acquired.setCrystal(acquired.resCrystal() + crystalProducer.acquire(units, consumer.personality()));
                     }
 
                     consumer.updateRessources(acquired);

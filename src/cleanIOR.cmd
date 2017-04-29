@@ -1,10 +1,8 @@
 @echo Cleaning IOR containers...
 @echo Removing Consumers...
-@del /F ..\Consumers.cns
+@del /F ..\consumers.drg
 @echo Removing Producers...
-@del /F ..\Producers_of_WOOD.res
-@del /F ..\Producers_of_MARBLE.res
-@del /F ..\Producers_of_WINE.res
-@del /F ..\Producers_of_CRYSTAL.res
-@del /F ..\Producers_of_BRIMSTONE.res
+@del /F ..\wood_producers.drg
+@del /F ..\marble_producers.drg
+@del /F ..\crystal_producers.drg
 @echo Cleaning finished

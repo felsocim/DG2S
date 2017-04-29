@@ -4,21 +4,17 @@ module Consumers
     {
         readonly attribute long resWood;
         readonly attribute long resMarble;
-        readonly attribute long resWine;
         readonly attribute long resCrystal;
-        readonly attribute long resBrimstone;
 
         void setWood(in long units);
         void setMarble(in long units);
-        void setWine(in long units);
         void setCrystal(in long units);
-        void setBrimstone(in long units);
-        void setAll(in long uWood, in long uMarble, in long uWine, in long uCrystal, in long uBrimstone);
+        void setAll(in long uWood, in long uMarble, in long uCrystal);
 
         boolean compare(in VectorRessource toBeCompared);
         void add(in VectorRessource operand);
         void subtract(in VectorRessource operand);
-        void addExplicit(in long uWood, in long uMarble, in long uWine, in long uCrystal, in long uBrimstone);
+        void addExplicit(in long uWood, in long uMarble, in long uCrystal);
 
         string toString();
     };
@@ -27,6 +23,8 @@ module Consumers
     {
         readonly attribute string idConsumer;
         readonly attribute boolean readyToGo;
+        readonly attribute boolean myTurn;
+        readonly attribute boolean inObservation;
         readonly attribute boolean manualMode;
         readonly attribute VectorRessource resCurrent;
         readonly attribute VectorRessource resTarget;
@@ -35,6 +33,8 @@ module Consumers
 
         void setIdConsumer(in string id);
         void setReadyToGo(in boolean status);
+        void setMyTurn(in boolean go);
+        void setInObservation(in boolean observation);
         void setManualMode(in boolean mode);
         void setResCurrent(in VectorRessource current);
         void setResTarget(in VectorRessource target);
