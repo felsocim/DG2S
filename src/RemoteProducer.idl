@@ -11,10 +11,13 @@ module Producers
 		readonly attribute long id;
 		readonly attribute long count;
 		readonly attribute long step;
-		readonly attribute long refillFrequence; 
+		readonly attribute long refillFrequence;
+		readonly attribute boolean readyToGo;
+
+		void setReadyToGo(in boolean status);
 
 		void pretype(in RessourceType type);
 		void generate();
-		boolean acquire(in long count);
+		long acquire(in long units, in char personality);
 	};
 };

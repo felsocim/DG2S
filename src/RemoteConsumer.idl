@@ -1,6 +1,6 @@
 module Consumers
 {
-    interface RessourceHolder
+    interface VectorRessource
     {
         readonly attribute long resWood;
         readonly attribute long resMarble;
@@ -13,11 +13,12 @@ module Consumers
         void setWine(in long units);
         void setCrystal(in long units);
         void setBrimstone(in long units);
-        void setAll(in long uWood, in long uMarble, in long uWine, in long uCrytsal, in long uBrimstone);
+        void setAll(in long uWood, in long uMarble, in long uWine, in long uCrystal, in long uBrimstone);
 
-        long compare(in RessourceHolder toBeCompared);
-        RessourceHolder add(in RessourceHolder operand);
-        RessourceHolder addExplicit(in long uWood, in long uMarble, in long uWine, in long uCrytsal, in long uBrimstone);
+        boolean compare(in VectorRessource toBeCompared);
+        void add(in VectorRessource operand);
+        void subtract(in VectorRessource operand);
+        void addExplicit(in long uWood, in long uMarble, in long uWine, in long uCrystal, in long uBrimstone);
 
         string toString();
     };
@@ -27,18 +28,21 @@ module Consumers
         readonly attribute string idConsumer;
         readonly attribute boolean readyToGo;
         readonly attribute boolean manualMode;
-        readonly attribute RessourceHolder resCurrent;
-        readonly attribute RessourceHolder resTarget;
+        readonly attribute VectorRessource resCurrent;
+        readonly attribute VectorRessource resTarget;
+        readonly attribute char personality;
         readonly attribute boolean gameOver;
 
         void setIdConsumer(in string id);
         void setReadyToGo(in boolean status);
         void setManualMode(in boolean mode);
-        void setResCurrent(in RessourceHolder current);
-        void setResTarget(in RessourceHolder target);
+        void setResCurrent(in VectorRessource current);
+        void setResTarget(in VectorRessource target);
+        void setPersonality(in char personality);
         void setGameOver(in boolean over);
 
-        RessourceHolder updateRessources(in RessourceHolder acquired);
+        void updateRessources(in VectorRessource acquired);
+        boolean finished();
 
         string toString();
     };

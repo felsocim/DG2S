@@ -2,6 +2,8 @@ package Producers;
 
 import org.omg.CORBA.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
 import java.io.FileNotFoundException;
@@ -58,7 +60,8 @@ public class Producer
 
             String ior = corba.object_to_string(ressource);
 
-            PrintWriter ior_writer = new PrintWriter("Producers_of_" + resType.toString() + ".res");
+            FileWriter fileWriter = new FileWriter("Producers_of_" + resType.toString() + ".res", true);
+            PrintWriter ior_writer = new PrintWriter(fileWriter);
             ior_writer.println(ior);
             ior_writer.close();
 
@@ -68,7 +71,7 @@ public class Producer
                 public void run() {
                     ressource.generate();
                 }
-            }, ressource.refillFrequence(), ressource.refillFrequence());
+            }, 30000, ressource.refillFrequence());
 
             System.out.println(resType.toString() + " producer initialized.");
         }
@@ -80,6 +83,10 @@ public class Producer
         {
             System.out.println("Unable to write down IOR!");
             System.exit(-1);
+        }
+        catch (IOException ioex)
+        {
+            ioex.printStackTrace();
         }
     }
 }
