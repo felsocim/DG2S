@@ -87,25 +87,8 @@ public class RemoteProducerImpl extends _RemoteProducerImplBase {
 
     public synchronized int acquire(int units, char personality)
     {
-        int toBeAcquired;
+        int toBeAcquired = units;
         int init = this.count;
-
-        switch(personality)
-        {
-            case 'c':
-                if(units == 0)
-                {
-                    toBeAcquired = 0;
-                }
-                else
-                {
-                    toBeAcquired = ( (units > 2 ) ? (units / 2) : 1 );
-                }
-                break;
-            default:
-                toBeAcquired = units;
-                break;
-        }
 
         int actuallyAcquired;
 

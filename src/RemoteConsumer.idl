@@ -29,6 +29,9 @@ module Consumers
         readonly attribute char personality;
         readonly attribute boolean gameOver;
         readonly attribute long long timeFinished;
+        readonly attribute boolean stolen;
+        readonly attribute RemoteConsumer thief;
+        readonly attribute VectorRessource resStolen;
 
         void setIdConsumer(in string id);
         void setReadyToGo(in boolean status);
@@ -39,8 +42,10 @@ module Consumers
         void setResTarget(in VectorRessource target);
         void setPersonality(in char personality);
         void setGameOver(in boolean over);
+        void unstole();
 
         void updateRessources(in VectorRessource acquired);
+        boolean stole(in VectorRessource toStole, in RemoteConsumer thief);
         boolean finished();
 
         string toString();

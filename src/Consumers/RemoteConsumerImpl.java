@@ -12,6 +12,9 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
     private char personality;
     private boolean gameOver;
     private long timeFinished;
+    private boolean stolen;
+    private RemoteConsumer thief;
+    private VectorRessource resStolen;
 
     public RemoteConsumerImpl(String id, boolean inObservation, boolean manual, VectorRessource target, char personality)
     {
@@ -25,6 +28,9 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         this.personality = personality;
         this.gameOver = false;
         this.timeFinished = 0;
+        this.stolen = false;
+        this.thief = null;
+        this.resStolen = new VectorRessourceImpl(0,0);
     }
 
     public synchronized String idConsumer ()
@@ -74,6 +80,21 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized long timeFinished () {
         return this.timeFinished;
+    }
+
+    public synchronized boolean stolen ()
+    {
+        return this.stolen;
+    }
+
+    public synchronized RemoteConsumer thief ()
+    {
+        return this.thief;
+    }
+
+    public synchronized VectorRessource resStolen ()
+    {
+        return this.resStolen;
     }
 
     public synchronized void setIdConsumer (String id)
@@ -126,7 +147,22 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         this.resCurrent.add(acquired);
     }
 
-    public synchronized boolean finished()
+    public synchronized boolean stole (VectorRessource toStole, RemoteConsumer thief)
+    {
+        if(!this.resCurrent().compare(toStole))
+        {
+            this.resCurrent().subtract(toStole);
+            this.resStolen.setAll(toStole.resWood(), toStole.resMarble());
+            this.thief = thief;
+            this.stolen = true;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public synchronized boolean finished ()
     {
         if(this.resTarget().compare(this.resCurrent))
         {
@@ -137,6 +173,27 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
         this.gameOver = false;
         return false;
+    }
+
+    public synchronized void unstole ()
+    {
+        if(this.resStolen.compare(this.thief.resCurrent()))
+        {
+            this.thief.resCurrent().subtract(this.resStolen);
+        }
+
+        if(this.resStolen.compare(this.thief.resCurrent()))
+        {
+            this.thief.resCurrent().subtract(this.resStolen);
+        }
+        else
+        {
+            this.thief.resTarget().add(this.resStolen);
+        }
+
+        this.stolen = false;
+        this.thief = null;
+        this.resStolen.setAll(0, 0);
     }
 
     public synchronized String _toString ()

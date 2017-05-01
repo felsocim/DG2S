@@ -128,6 +128,10 @@ public class Consumer
 
         LinkedList<String> prodWoodIOR = loadProducers(RessourceType.WOOD);
         LinkedList<String> prodMarbleIOR = loadProducers(RessourceType.MARBLE);
+        LinkedList<String> consumersIOR = new LinkedList<String>();
+        String consumerIOR;
+
+        FortuneTeller fortuneTeller = new FortuneTeller(personality, humanGamer);
 
         if(prodWoodIOR.size() < 1 || prodMarbleIOR.size() < 1)
         {
@@ -139,7 +143,7 @@ public class Consumer
         {
             ORB corba = ORB.init(args, null);
 
-            String consumerIOR = corba.object_to_string(consumer);
+            consumerIOR = corba.object_to_string(consumer);
 
             try
             {
@@ -160,6 +164,7 @@ public class Consumer
 
             RemoteProducer[] prodWood = new RemoteProducer[prodWoodIOR.size()];
             RemoteProducer[] prodMarble = new RemoteProducer[prodMarbleIOR.size()];
+            RemoteConsumer[] consumers = null;
 
             for (int i = 0; i < prodWood.length; i++)
             {
@@ -173,8 +178,45 @@ public class Consumer
 
             System.out.println("Consumer " + consumer.idConsumer() + " initialized. Waiting for signal...");
 
+            boolean loadOthers = true;
+
             while(!consumer.finished())
             {
+                if(consumer.readyToGo() && loadOthers)
+                {
+                    try
+                    {
+                        FileReader fileReader = new FileReader("consumers.drg");
+                        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                        String current;
+
+                        while((current = bufferedReader.readLine()) != null)
+                        {
+                            if(current.compareTo(consumerIOR) != 0)
+                            {
+                                consumersIOR.add(current);
+                            }
+                        }
+
+                        fileReader.close();
+                    }
+                    catch (IOException inputOutputException)
+                    {
+                        System.out.println("Unable to read consumers list file!");
+                        System.exit(12);
+                    }
+
+                    consumers = new RemoteConsumer[consumersIOR.size()];
+
+                    for (int i = 0; i < consumersIOR.size(); i++)
+                    {
+                        consumers[i] = RemoteConsumerHelper.narrow(corba.string_to_object(consumersIOR.get(i)));
+                    }
+
+                    loadOthers = false;
+                }
+
                 if(consumer.readyToGo() && consumer.myTurn())
                 {
                     int userWood = 0, userMarble = 0;
@@ -213,58 +255,9 @@ public class Consumer
                         }
                     }
 
-                    VectorRessourceImpl acquired = new VectorRessourceImpl(0,0);
+                    fortuneTeller.getFortune(consumer, consumers, prodWood, prodMarble, new VectorRessourceImpl(userWood, userMarble));
 
-                    int wpEmpty = 0, mpEmpty = 0;
-
-                    for (RemoteProducer woodProducer : prodWood)
-                    {
-                        int units = consumer.resTarget().resWood();
-
-                        if(consumer.inObservation())
-                        {
-                            units -= consumer.resCurrent().resWood();
-                        }
-
-                        if(humanGamer)
-                        {
-                            units = userWood;
-                        }
-
-                        acquired.setWood(acquired.resWood() + woodProducer.acquire(units, consumer.personality()));
-
-                        if(woodProducer.empty() && !woodProducer.infiniteRessources())
-                            wpEmpty++;
-                    }
-
-                    for (RemoteProducer marbleProducer : prodMarble)
-                    {
-                        int units = consumer.resTarget().resMarble();
-
-                        if(consumer.inObservation())
-                        {
-                            units -= consumer.resCurrent().resMarble();
-                        }
-
-                        if(humanGamer)
-                        {
-                            units = userMarble;
-                        }
-
-                        acquired.setMarble(acquired.resMarble() + marbleProducer.acquire(units, consumer.personality()));
-
-                        if(marbleProducer.empty() && !marbleProducer.infiniteRessources())
-                            mpEmpty++;
-                    }
-
-                    consumer.updateRessources(acquired);
-
-                    System.out.println(consumer._toString());
-
-                    if((wpEmpty >= prodWood.length) || (mpEmpty >= prodMarble.length))
-                    {
-                        consumer.setGameOver(true);
-                    }
+                    //System.out.println(consumer._toString());
 
                     if(consumer.manualMode())
                     {
