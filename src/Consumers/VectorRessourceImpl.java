@@ -65,6 +65,6 @@ public class VectorRessourceImpl extends _VectorRessourceImplBase
 
     public String _toString ()
     {
-        return ("<Wood: " + this.resWood + ", Marble: " + this.resMarble);
+        return ("<Wood: " + this.resWood + ", Marble: " + this.resMarble + ">");
     }
 }

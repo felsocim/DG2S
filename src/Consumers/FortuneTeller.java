@@ -146,7 +146,7 @@ public class FortuneTeller
 
         for (RemoteProducer woodProducer : woodProducers)
         {
-            if(total <= target)
+            if(total < target)
             {
                 if(unitsPerProducer <= target)
                 {
@@ -169,7 +169,7 @@ public class FortuneTeller
 
         for (RemoteProducer marbleProducer : marbleProducers)
         {
-            if(total <= target)
+            if(total < target)
             {
                 if(unitsPerProducer <= target)
                 {

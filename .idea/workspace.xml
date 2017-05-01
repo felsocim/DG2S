@@ -4,7 +4,7 @@
     <list default="true" id="56d07711-7b47-4f83-ba6e-4fe7f41b4c42" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" afterPath="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Manager/Manager.java" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,8 +21,8 @@
       <file leaf-file-name="Manager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Manager/Manager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-299">
-              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state relative-caret-position="229">
+              <caret line="268" column="82" lean-forward="false" selection-start-line="268" selection-start-column="82" selection-end-line="268" selection-end-column="82" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,11 +43,11 @@
       <file leaf-file-name="VectorRessourceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+            <state relative-caret-position="437">
+              <caret line="67" column="77" lean-forward="false" selection-start-line="67" selection-start-column="77" selection-end-line="67" selection-end-column="77" />
               <folding>
                 <element signature="e#1482#1483#0" expanded="true" />
-                <element signature="e#1563#1564#0" expanded="true" />
+                <element signature="e#1569#1570#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,7 +56,7 @@
       <file leaf-file-name="Consumer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Consumers/Consumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
+            <state relative-caret-position="181">
               <caret line="259" column="22" lean-forward="false" selection-start-line="259" selection-start-column="22" selection-end-line="259" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -70,8 +70,8 @@
       <file leaf-file-name="FortuneTeller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
-              <caret line="31" column="10" lean-forward="false" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+            <state relative-caret-position="528">
+              <caret line="171" column="22" lean-forward="true" selection-start-line="171" selection-start-column="22" selection-end-line="171" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,7 +82,7 @@
       <file leaf-file-name="RemoteConsumerImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
+            <state relative-caret-position="-587">
               <caret line="121" column="31" lean-forward="true" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="31" />
               <folding>
                 <element signature="e#1632#1633#0" expanded="true" />
@@ -173,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/Consumers/RemoteConsumerOperations.java" />
         <option value="$PROJECT_DIR$/src/Producers/RemoteProducerOperations.java" />
         <option value="$PROJECT_DIR$/Consumers.cns" />
-        <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" />
         <option value="$PROJECT_DIR$/src/Consumers/BoolImpl.java" />
         <option value="$PROJECT_DIR$/src/Consumers/ConsumerThread.java" />
         <option value="$PROJECT_DIR$/src/RemoteProducer.idl" />
@@ -183,8 +182,9 @@
         <option value="$PROJECT_DIR$/src/Producers/RemoteProducerImpl.java" />
         <option value="$PROJECT_DIR$/src/RemoteConsumer.idl" />
         <option value="$PROJECT_DIR$/src/Consumers/Consumer.java" />
-        <option value="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" />
         <option value="$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java" />
+        <option value="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" />
+        <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" />
         <option value="$PROJECT_DIR$/src/Manager/Manager.java" />
       </list>
     </option>
@@ -672,7 +672,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Consumers.Consumer" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-i Roger -tw 10 -tm 15 -I -o" />
+      <option name="PROGRAM_PARAMETERS" value="-i Roger -tw 10 -tm 15 -I" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -687,7 +687,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Manager.Manager" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-f -s" />
+      <option name="PROGRAM_PARAMETERS" value="-a -s" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -925,44 +925,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
-          <folding>
-            <element signature="e#1482#1483#0" expanded="true" />
-            <element signature="e#1563#1564#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Producers/RemoteProducerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Consumers/Consumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="259" column="22" lean-forward="false" selection-start-line="259" selection-start-column="22" selection-end-line="259" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#407#415#0" expanded="true" />
-            <element signature="e#4644#4652#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="31" column="10" lean-forward="false" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -974,9 +941,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="171" column="22" lean-forward="true" selection-start-line="171" selection-start-column="22" selection-end-line="171" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Consumers/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="259" column="22" lean-forward="false" selection-start-line="259" selection-start-column="22" selection-end-line="259" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#407#415#0" expanded="true" />
+            <element signature="e#4644#4652#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
+        <state relative-caret-position="-587">
           <caret line="121" column="31" lean-forward="true" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="31" />
           <folding>
             <element signature="e#1632#1633#0" expanded="true" />
@@ -987,10 +976,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="67" column="77" lean-forward="false" selection-start-line="67" selection-start-column="77" selection-end-line="67" selection-end-column="77" />
+          <folding>
+            <element signature="e#1482#1483#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Manager/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-299">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        <state relative-caret-position="229">
+          <caret line="268" column="82" lean-forward="false" selection-start-line="268" selection-start-column="82" selection-end-line="268" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

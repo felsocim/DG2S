@@ -266,7 +266,7 @@ public class Manager
 
             long totalSeconds = totalTime / 1000000000;
 
-            System.out.println("Game ended after " + totalSeconds + " seconds.");
+            System.out.println("\nGame ended after " + totalSeconds + " seconds.\n");
 
             if(generateScore)
             {
@@ -309,18 +309,11 @@ public class Manager
                     });
                 }
 
-                System.out.println("Results: \nAgent name:\t\t\t" + ((waitForAll) ? "Time took:" : "Current ressources:"));
+                System.out.println("Results: \nAgent name:\t\t\tTime took:\t\t\tRes count:");
 
                 for (int i = (remoteConsumers.length - 1); i >= 0; i--)
                 {
-                    if(waitForAll)
-                    {
-                        System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000));
-                    }
-                    else
-                    {
-                        System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t<" + remoteConsumers[i].resCurrent().resWood() + ", " + remoteConsumers[i].resCurrent().resMarble() + ">");
-                    }
+                    System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000) + "\t\t\t\t\t<" + remoteConsumers[i].resCurrent().resWood() + ", " + remoteConsumers[i].resCurrent().resMarble() + ">");
                 }
             }
         }
