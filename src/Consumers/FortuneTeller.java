@@ -57,22 +57,55 @@ public class FortuneTeller
         {
             if(localConsumer.inObservation() && remoteConsumers != null)
             {
-                int avgWood = 0;
+                int avgWood = 0, avgMarble = 0;
 
                 for (RemoteConsumer remoteConsumer : remoteConsumers)
                 {
                     avgWood += remoteConsumer.resCurrent().resWood();
+                    avgMarble += remoteConsumer.resCurrent().resMarble();
                 }
 
                 avgWood /= remoteConsumers.length;
+                avgMarble /= remoteConsumers.length;
 
-                if(avgWood >= localConsumer.resCurrent().resWood())
+                if((avgWood > localConsumer.resCurrent().resWood()) || (avgMarble > localConsumer.resCurrent().resMarble()))
                 {
-                    acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                    if(avgWood > localConsumer.resCurrent().resWood())
+                    {
+                        acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                    }
+
+                    if(avgMarble > localConsumer.resCurrent().resMarble())
+                    {
+                        acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                    }
                 }
                 else
                 {
-                    acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                    if(this.personality == 'i')
+                    {
+                        if(unitsWood > 0)
+                        {
+                            acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                        }
+                        else
+                        {
+                            acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                        }
+                    }
+                    else
+                    {
+                        if(this.last == RessourceType.WOOD && unitsMarble > 0)
+                        {
+                            acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                            this.last = RessourceType.MARBLE;
+                        }
+                        else
+                        {
+                            acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                            this.last = RessourceType.WOOD;
+                        }
+                    }
                 }
             }
             else

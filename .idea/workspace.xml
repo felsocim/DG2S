@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56d07711-7b47-4f83-ba6e-4fe7f41b4c42" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/Consumer.java" afterPath="$PROJECT_DIR$/src/Consumers/Consumer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumer.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHelper.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHolder.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerOperations.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerOperations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessource.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceHelper.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceHolder.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceOperations.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceOperations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerImplBase.java" afterPath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerImplBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerStub.java" afterPath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_VectorRessourceImplBase.java" afterPath="$PROJECT_DIR$/src/Consumers/_VectorRessourceImplBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_VectorRessourceStub.java" afterPath="$PROJECT_DIR$/src/Consumers/_VectorRessourceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RemoteProducerImpl.java" afterPath="$PROJECT_DIR$/src/Producers/RemoteProducerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RemoteConsumer.idl" afterPath="$PROJECT_DIR$/src/RemoteConsumer.idl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" afterPath="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,8 +67,8 @@
       <file leaf-file-name="FortuneTeller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="1712">
+              <caret line="107" column="21" lean-forward="false" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -699,7 +682,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Consumers.Consumer" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-i Roger -tw 10 -tm 15 -I" />
+      <option name="PROGRAM_PARAMETERS" value="-i Roger -tw 10 -tm 15 -I -o" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -998,8 +981,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="1712">
+          <caret line="107" column="21" lean-forward="false" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
