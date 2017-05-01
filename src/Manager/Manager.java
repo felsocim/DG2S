@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 public class Manager
@@ -42,9 +44,12 @@ public class Manager
                 }
             }
 
-            for (RemoteConsumer remoteConsumer : consumers)
+            if(result)
             {
-                remoteConsumer.setGameOver(true);
+                for (RemoteConsumer remoteConsumer : consumers)
+                {
+                    remoteConsumer.setGameOver(true);
+                }
             }
 
             return result;
@@ -265,21 +270,58 @@ public class Manager
 
             if(generateScore)
             {
-                /*
                 if(waitForAll)
                 {
-                    for (RemoteConsumer remoteConsumer : remoteConsumers)
-                    {
+                    Arrays.sort(remoteConsumers, new Comparator<RemoteConsumer>() {
+                        @Override
+                        public int compare(RemoteConsumer o1, RemoteConsumer o2) {
+                            if(o1.timeFinished() > o2.timeFinished())
+                            {
+                                return 1;
+                            }
 
-                    }
+                            if(o1.timeFinished() < o2.timeFinished())
+                            {
+                                return -1;
+                            }
+
+                            return 0;
+                        }
+                    });
                 }
                 else
                 {
-                    for (RemoteConsumer remoteConsumer : remoteConsumers)
-                    {
+                    Arrays.sort(remoteConsumers, new Comparator<RemoteConsumer>() {
+                        @Override
+                        public int compare(RemoteConsumer o1, RemoteConsumer o2) {
+                            if( (o1.resCurrent().resWood() > o2.resCurrent().resWood()) || (o1.resCurrent().resMarble() > o2.resCurrent().resMarble()))
+                            {
+                                return 1;
+                            }
 
+                            if( (o1.resCurrent().resWood() < o2.resCurrent().resWood()) || (o1.resCurrent().resMarble() < o2.resCurrent().resMarble()))
+                            {
+                                return -1;
+                            }
+
+                            return 0;
+                        }
+                    });
+                }
+
+                System.out.println("Results: \nAgent name:\t\t\t" + ((waitForAll) ? "Time took:" : "Current ressources:"));
+
+                for (int i = (remoteConsumers.length - 1); i >= 0; i--)
+                {
+                    if(waitForAll)
+                    {
+                        System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000));
                     }
-                }*/
+                    else
+                    {
+                        System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t<" + remoteConsumers[i].resCurrent().resWood() + ", " + remoteConsumers[i].resCurrent().resMarble() + ">");
+                    }
+                }
             }
         }
         catch (SystemException systemException)

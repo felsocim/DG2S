@@ -29,7 +29,7 @@ public class FortuneTeller
         int unitsWood = localConsumer.resTarget().resWood() - localConsumer.resCurrent().resWood();
         int unitsMarble = localConsumer.resTarget().resMarble() - localConsumer.resCurrent().resMarble();
 
-        System.out.println("Units " + unitsWood + " -- " + unitsMarble);
+        //System.out.println("Units " + unitsWood + " -- " + unitsMarble);
 
         if(this.human)
         {

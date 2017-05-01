@@ -164,10 +164,10 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized boolean finished ()
     {
-        if(this.resTarget().compare(this.resCurrent))
+        if(this.resTarget().compare(this.resCurrent) || this.gameOver)
         {
             this.gameOver = true;
-            this.timeFinished = System.nanoTime();
+            if(this.timeFinished == 0) this.timeFinished = System.nanoTime();
             return true;
         }
 
