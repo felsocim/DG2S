@@ -11,6 +11,7 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
     private VectorRessource resTarget;
     private char personality;
     private boolean gameOver;
+    private long timeFinished;
 
     public RemoteConsumerImpl(String id, boolean inObservation, boolean manual, VectorRessource target, char personality)
     {
@@ -19,10 +20,11 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         this.myTurn = !manual;
         this.inObservation = inObservation;
         this.manualMode = manual;
-        this.resCurrent = new VectorRessourceImpl(0, 0, 0);
+        this.resCurrent = new VectorRessourceImpl(0, 0);
         this.resTarget = target;
         this.personality = personality;
         this.gameOver = false;
+        this.timeFinished = 0;
     }
 
     public synchronized String idConsumer ()
@@ -68,6 +70,10 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
     public synchronized boolean gameOver ()
     {
         return this.gameOver;
+    }
+
+    public synchronized long timeFinished () {
+        return this.timeFinished;
     }
 
     public synchronized void setIdConsumer (String id)
@@ -125,6 +131,7 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
         if(this.resTarget().compare(this.resCurrent))
         {
             this.gameOver = true;
+            this.timeFinished = System.nanoTime();
             return true;
         }
 

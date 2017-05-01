@@ -4,14 +4,12 @@ public class VectorRessourceImpl extends _VectorRessourceImplBase
 {
     private int resWood;
     private int resMarble;
-    private int resCrystal;
 
-    public VectorRessourceImpl (int initWood, int initMarble, int initCrystal)
+    public VectorRessourceImpl (int initWood, int initMarble)
     {
         super();
         this.resWood = initWood;
         this.resMarble = initMarble;
-        this.resCrystal = initCrystal;
     }
 
     public int resWood ()
@@ -24,11 +22,6 @@ public class VectorRessourceImpl extends _VectorRessourceImplBase
         return this.resMarble;
     }
 
-    public int resCrystal ()
-    {
-        return this.resCrystal;
-    }
-
     public void setWood (int units)
     {
         this.resWood = units;
@@ -39,48 +32,39 @@ public class VectorRessourceImpl extends _VectorRessourceImplBase
         this.resMarble = units;
     }
 
-    public void setCrystal (int units)
-    {
-        this.resCrystal = units;
-    }
-
-    public void setAll (int uWood, int uMarble, int uCrystal)
+    public void setAll (int uWood, int uMarble)
     {
         this.resWood = uWood;
         this.resMarble = uMarble;
-        this.resCrystal = uCrystal;
     }
 
     public boolean compare (VectorRessource toBeCompared)
     {
-        return ( (toBeCompared.resWood() >= this.resWood) && (toBeCompared.resMarble() >= this.resMarble) && (toBeCompared.resCrystal() >= this.resCrystal) );
+        return ( (toBeCompared.resWood() >= this.resWood) && (toBeCompared.resMarble() >= this.resMarble) );
     }
 
     public void add (VectorRessource operand)
     {
         this.resWood += operand.resWood();
         this.resMarble += operand.resMarble();
-        this.resCrystal += operand.resCrystal();
     }
 
     public void subtract(VectorRessource operand)
     {
-        System.out.println("Te be added: W = " + operand.resWood() + ", M = " + operand.resMarble() + ", C = " + operand.resCrystal());
+        System.out.println("Te be added: W = " + operand.resWood() + ", M = " + operand.resMarble());
 
         this.resWood -= operand.resWood();
         this.resMarble -= operand.resMarble();
-        this.resCrystal -= operand.resCrystal();
     }
 
-    public void addExplicit (int uWood, int uMarble, int uCrystal)
+    public void addExplicit (int uWood, int uMarble)
     {
         this.resWood += uWood;
         this.resMarble += uMarble;
-        this.resCrystal += uCrystal;
     }
 
     public String _toString ()
     {
-        return ("<Wood: " + this.resWood + ", Marble: " + this.resMarble + ", Crystal: " + this.resCrystal + ">");
+        return ("<Wood: " + this.resWood + ", Marble: " + this.resMarble);
     }
 }

@@ -4,17 +4,15 @@ module Consumers
     {
         readonly attribute long resWood;
         readonly attribute long resMarble;
-        readonly attribute long resCrystal;
 
         void setWood(in long units);
         void setMarble(in long units);
-        void setCrystal(in long units);
-        void setAll(in long uWood, in long uMarble, in long uCrystal);
+        void setAll(in long uWood, in long uMarble);
 
         boolean compare(in VectorRessource toBeCompared);
         void add(in VectorRessource operand);
         void subtract(in VectorRessource operand);
-        void addExplicit(in long uWood, in long uMarble, in long uCrystal);
+        void addExplicit(in long uWood, in long uMarble);
 
         string toString();
     };
@@ -30,6 +28,7 @@ module Consumers
         readonly attribute VectorRessource resTarget;
         readonly attribute char personality;
         readonly attribute boolean gameOver;
+        readonly attribute long long timeFinished;
 
         void setIdConsumer(in string id);
         void setReadyToGo(in boolean status);
