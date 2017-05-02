@@ -316,9 +316,19 @@ public class Manager
 
                 System.out.println("Results: \nAgent name:\t\t\tTime took:\t\t\tRes count:");
 
-                for (int i = (remoteConsumers.length - 1); i >= 0; i--)
+                if(waitForAll)
                 {
-                    System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000) + "\t\t\t\t\t<" + remoteConsumers[i].resCurrent().resWood() + ", " + remoteConsumers[i].resCurrent().resMarble() + ">");
+                    for(RemoteConsumer rc : remoteConsumers)
+                    {
+                        System.out.println(rc.idConsumer() + "\t\t\t\t" + ((rc.timeFinished() - timeZero) / 1000000000) + "\t\t\t\t\t<" + rc.resCurrent().resWood() + ", " + rc.resCurrent().resMarble() + ">");
+                    }
+                }
+                else
+                {
+                    for (int i = (remoteConsumers.length - 1); i >= 0; i--)
+                    {
+                        System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000) + "\t\t\t\t\t<" + remoteConsumers[i].resCurrent().resWood() + ", " + remoteConsumers[i].resCurrent().resMarble() + ">");
+                    }
                 }
             }
         }
