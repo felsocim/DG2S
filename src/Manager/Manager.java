@@ -241,11 +241,16 @@ public class Manager
 
                     if(manual)
                     {
-                        remoteConsumer.setMyTurn(true);
+                        if(!remoteConsumer.finished())
+                        {
+                            remoteConsumer.setMyTurn(true);
 
-                        while (remoteConsumer.myTurn()) {
-                            //Waiting for the current agent to finish
+                            while (remoteConsumer.myTurn()) {
+                                //Waiting for the current agent to finish
+                            }
                         }
+
+                        System.out.println(remoteConsumer.idConsumer() + " passed its turn.");
                     }
                 }
 
