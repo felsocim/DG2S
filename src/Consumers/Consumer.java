@@ -180,90 +180,152 @@ public class Consumer
 
             boolean loadOthers = true;
 
-            while(!consumer.finished())
+            long lastTime = System.currentTimeMillis();
+            long currentTime = System.currentTimeMillis();
+
+            try
             {
-                if(consumer.readyToGo() && loadOthers)
+                PrintWriter analysis = new PrintWriter("analysis/" + consumer.idConsumer() + "Analysis.js");
+                analysis.println("var data = [");
+
+                while(!consumer.finished())
                 {
-                    try
+                    if(consumer.readyToGo() && loadOthers)
                     {
-                        FileReader fileReader = new FileReader("consumers.drg");
-                        BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-                        String current;
-
-                        while((current = bufferedReader.readLine()) != null)
+                        try
                         {
-                            if(current.compareTo(consumerIOR) != 0)
+                            FileReader fileReader = new FileReader("consumers.drg");
+                            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                            String current;
+
+                            while((current = bufferedReader.readLine()) != null)
                             {
-                                consumersIOR.add(current);
+                                if(current.compareTo(consumerIOR) != 0)
+                                {
+                                    consumersIOR.add(current);
+                                }
+                            }
+
+                            fileReader.close();
+                        }
+                        catch (IOException inputOutputException)
+                        {
+                            System.out.println("Unable to read consumers list file!");
+                            System.exit(12);
+                        }
+
+                        consumers = new RemoteConsumer[consumersIOR.size()];
+
+                        for (int i = 0; i < consumersIOR.size(); i++)
+                        {
+                            consumers[i] = RemoteConsumerHelper.narrow(corba.string_to_object(consumersIOR.get(i)));
+                        }
+
+                        loadOthers = false;
+                        lastTime = System.currentTimeMillis();
+                        currentTime = System.currentTimeMillis();
+                    }
+
+                    if(consumer.readyToGo() && consumer.myTurn())
+                    {
+                        int userWood = 0, userMarble = 0;
+
+                        if(humanGamer)
+                        {
+                            VectorRessourceImpl remaining = new VectorRessourceImpl(consumer.resTarget().resWood(), consumer.resTarget().resMarble());
+                            remaining.subtract(consumer.resCurrent());
+
+                            System.out.println("Remaining: \n" + remaining._toString());
+
+                            System.out.println("\nWood amount to acquire : ");
+
+                            try
+                            {
+                                userResponse = userInputReader.readLine();
+                                userWood = Integer.parseInt(userResponse);
+                            }
+                            catch (IOException e)
+                            {
+                                System.out.println("User input exception!");
+                                System.exit(-1);
+                            }
+
+                            System.out.println("\nMarble amount to acquire : ");
+
+                            try
+                            {
+                                userResponse = userInputReader.readLine();
+                                userMarble = Integer.parseInt(userResponse);
+                            }
+                            catch (IOException e)
+                            {
+                                System.out.println("User input exception!");
+                                System.exit(-1);
                             }
                         }
 
-                        fileReader.close();
-                    }
-                    catch (IOException inputOutputException)
-                    {
-                        System.out.println("Unable to read consumers list file!");
-                        System.exit(12);
-                    }
+                        currentTime = System.currentTimeMillis();
 
-                    consumers = new RemoteConsumer[consumersIOR.size()];
+                        if((currentTime - lastTime) > 1000)
+                        {
+                            analysis.println("{ t: '" + currentTime + "', " + consumer._toString() + "},");
+                            lastTime = currentTime;
+                        }
 
-                    for (int i = 0; i < consumersIOR.size(); i++)
-                    {
-                        consumers[i] = RemoteConsumerHelper.narrow(corba.string_to_object(consumersIOR.get(i)));
+                        fortuneTeller.getFortune(consumer, consumers, prodWood, prodMarble, new VectorRessourceImpl(userWood, userMarble));
+
+                        //System.out.println(consumer._toString());
+
+                        if(consumer.manualMode())
+                        {
+                            consumer.setMyTurn(false);
+                        }
                     }
-
-                    loadOthers = false;
                 }
 
-                if(consumer.readyToGo() && consumer.myTurn())
-                {
-                    int userWood = 0, userMarble = 0;
+                currentTime = System.currentTimeMillis();
 
-                    if(humanGamer)
-                    {
-                        VectorRessourceImpl remaining = new VectorRessourceImpl(consumer.resTarget().resWood(), consumer.resTarget().resMarble());
-                        remaining.subtract(consumer.resCurrent());
+                analysis.println("{ t: '" + currentTime + "', " + consumer._toString() + "}");
+                analysis.println("\t],");
+                analysis.println("config = {\n" +
+                        "      data: data,\n" +
+                        "      xkey: 't',\n" +
+                        "      ykeys: ['w', 'm'],\n" +
+                        "      labels: ['Wood', 'Marble'],\n" +
+                        "      fillOpacity: 0.6,\n" +
+                        "      hideHover: 'auto',\n" +
+                        "      behaveLikeLine: true,\n" +
+                        "      resize: true,\n" +
+                        "      pointFillColors:['#ffffff'],\n" +
+                        "      pointStrokeColors: ['black'],\n" +
+                        "      lineColors:['gray','red']\n" +
+                        "  }; config.element = 'line-chart';\n" +
+                        "new Morris.Line(config);");
+                analysis.close();
 
-                        System.out.println("Remaining: \n" + remaining._toString());
+                PrintWriter display = new PrintWriter("analysis/" + consumer.idConsumer() + "Results.html");
 
-                        System.out.println("\nWood amount to acquire : ");
-
-                        try
-                        {
-                            userResponse = userInputReader.readLine();
-                            userWood = Integer.parseInt(userResponse);
-                        }
-                        catch (IOException e)
-                        {
-                            System.out.println("User input exception!");
-                            System.exit(-1);
-                        }
-
-                        System.out.println("\nMarble amount to acquire : ");
-
-                        try
-                        {
-                            userResponse = userInputReader.readLine();
-                            userMarble = Integer.parseInt(userResponse);
-                        }
-                        catch (IOException e)
-                        {
-                            System.out.println("User input exception!");
-                            System.exit(-1);
-                        }
-                    }
-
-                    fortuneTeller.getFortune(consumer, consumers, prodWood, prodMarble, new VectorRessourceImpl(userWood, userMarble));
-
-                    //System.out.println(consumer._toString());
-
-                    if(consumer.manualMode())
-                    {
-                        consumer.setMyTurn(false);
-                    }
-                }
+                display.println("<html>\n" +
+                        "\t<head>\n" +
+                        "\t\t<title>" + consumer.idConsumer() + " game advancement analysis</title>");
+                display.println("<link rel=\"stylesheet\" href=\"morris.css\">\n" +
+                        "\t\t<script src=\"jquery.min.js\"></script>\n" +
+                        "\t\t<script src=\"raphael.min.js\"></script>\n" +
+                        "\t\t<script src=\"morris.min.js\"></script>\n" +
+                        "\t\t\n" +
+                        "\t</head>\n" +
+                        "\t<body>\n" +
+                        "\t\t<div id=\"line-chart\" style=\"height: 250px;\"></div>\n" +
+                        "\t\t<script src=\"" + consumer.idConsumer() + "Analysis.js\"></script>\n" +
+                        "\t</body>\n" +
+                        "</html>");
+                display.close();
+            }
+            catch (IOException e)
+            {
+                System.err.println("Unable to initialize the analysis file!");
+                System.exit(-1);
             }
 
             System.out.println("Consumer achieved the target!");

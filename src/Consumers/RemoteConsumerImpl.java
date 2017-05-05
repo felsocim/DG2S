@@ -149,7 +149,7 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized boolean stole (VectorRessource toStole, RemoteConsumer thief)
     {
-        System.out.println("Someone wants to stole me!");
+        //System.out.println("Someone wants to stole me!");
         if((this.resCurrent.resWood() >= toStole.resWood() && this.resCurrent.resMarble() >= toStole.resMarble()) && !this.gameOver)
         {
             this.resCurrent.subtract(toStole);
@@ -201,6 +201,6 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized String _toString ()
     {
-        return (this.idConsumer + "\nCurrent ressources status: " + this.resCurrent._toString() + "\nTarget ressources status: " + this.resTarget._toString() );
+        return (this.resCurrent._toString());
     }
 }
