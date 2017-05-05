@@ -96,7 +96,6 @@ public class Manager
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter helpFormatter = new HelpFormatter();
-        helpFormatter.printHelp("Manager -h", options, false);
         CommandLine commandLine = null;
 
         try
@@ -132,6 +131,11 @@ public class Manager
         if(commandLine.hasOption("s"))
         {
             generateScore = true;
+        }
+
+        if(commandLine.hasOption("h"))
+        {
+            helpFormatter.printHelp("Manager -h", options, false);
         }
 
         try
@@ -314,11 +318,16 @@ public class Manager
 
                 System.out.println("Results: \nAgent name:\t\t\tTime took:\t\t\tRes count:");
 
+
+                FileWriter scoreFile = new FileWriter("analysis/Scores.drg", true);
+                PrintWriter scoreWriter = new PrintWriter(scoreFile);
+
                 if(waitForAll)
                 {
                     for(RemoteConsumer rc : remoteConsumers)
                     {
                         System.out.println(rc.idConsumer() + "\t\t\t\t" + ((rc.timeFinished() - timeZero) / 1000000000) + "\t\t\t\t\t<" + rc.resCurrent().resWood() + ", " + rc.resCurrent().resMarble() + ">");
+                        scoreWriter.println(rc.idConsumer() + ":" + ((rc.timeFinished() - timeZero) / 1000000000) + ":" + rc.resCurrent().resWood() + ":" + rc.resCurrent().resMarble() + ":" + (rc.inObservation() ? "Y" : "N") + ":" + rc.personality() + ":" + rc.resTarget().resWood() + ":" + rc.resTarget().resMarble() + ":" + "Y");
                     }
                 }
                 else
@@ -326,8 +335,11 @@ public class Manager
                     for (int i = (remoteConsumers.length - 1); i >= 0; i--)
                     {
                         System.out.println(remoteConsumers[i].idConsumer() + "\t\t\t\t" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000) + "\t\t\t\t\t<" + remoteConsumers[i].resCurrent().resWood() + ", " + remoteConsumers[i].resCurrent().resMarble() + ">");
+                        scoreWriter.println(remoteConsumers[i].idConsumer() + ":" + ((remoteConsumers[i].timeFinished() - timeZero) / 1000000000) + ":" + remoteConsumers[i].resCurrent().resWood() + ":" + remoteConsumers[i].resCurrent().resMarble() + ":" + (remoteConsumers[i].inObservation() ? "Y" : "N") + ":" + remoteConsumers[i].personality() + ":" + remoteConsumers[i].resTarget().resWood() + ":" + remoteConsumers[i].resTarget().resMarble() + ":" + "N");
                     }
                 }
+
+                scoreWriter.close();
             }
         }
         catch (SystemException systemException)

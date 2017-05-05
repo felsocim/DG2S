@@ -47,7 +47,6 @@ public class Consumer
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine = null;
         HelpFormatter helpFormatter = new HelpFormatter();
-        helpFormatter.printHelp("Producer -h", options, false);
 
         options.addOption(OptionBuilder.withLongOpt("identificator").withArgName("string").hasArg().withDescription("consumer unique indentifier (must be different from any other simultaneously running consumer)").create("i"));
         options.addOption(OptionBuilder.withLongOpt("target-wood").withArgName("count").hasArg().withDescription("consumer's wood ressource target").create("tw"));
@@ -122,6 +121,11 @@ public class Consumer
         if(commandLine.hasOption("t"))
         {
             manualMode = true;
+        }
+
+        if(commandLine.hasOption("h"))
+        {
+            helpFormatter.printHelp("Consumer -h", options, false);
         }
 
         BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));

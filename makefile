@@ -13,3 +13,7 @@ manager:
 
 clean:
 	rm -f -r ./out/*
+	rm -f -r *.drg
+
+reinit:
+	rm -f -r *.drg

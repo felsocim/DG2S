@@ -53,8 +53,8 @@ public class VectorRessourceImpl extends _VectorRessourceImplBase
     {
         System.out.println("Te be subtracted: W = " + operand.resWood() + ", M = " + operand.resMarble());
 
-        this.resWood -= operand.resWood();
-        this.resMarble -= operand.resMarble();
+        if(this.resWood >= operand.resWood()) this.resWood -= operand.resWood();
+        if(this.resMarble >= operand.resMarble()) this.resMarble -= operand.resMarble();
     }
 
     public void addExplicit (int uWood, int uMarble)

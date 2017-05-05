@@ -19,7 +19,6 @@ public class Producer
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine = null;
         HelpFormatter helpFormatter = new HelpFormatter();
-        helpFormatter.printHelp("Producer -h", options, false);
 
         options.addOption(OptionBuilder.withLongOpt("identificator").hasArg().withDescription("producer unique indentifier (must be different from any other simultaneously running producer)").create("i"));
         options.addOption(OptionBuilder.withLongOpt("type").withArgName("RessourceType").hasArg().withDescription("producing ressource type (WOOD or MARBLE)").create("t"));
@@ -84,6 +83,11 @@ public class Producer
         if(commandLine.hasOption("I"))
         {
             infiniteRessources = true;
+        }
+
+        if(commandLine.hasOption("h"))
+        {
+            helpFormatter.printHelp("Producer -h", options, false);
         }
 
         RessourceType resType;

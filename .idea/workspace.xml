@@ -2,31 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56d07711-7b47-4f83-ba6e-4fe7f41b4c42" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Consumers/ConsumerThread.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/demo.sh" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/BergerAnalysis.js" afterPath="$PROJECT_DIR$/analysis/BergerAnalysis.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/JeanAnalysis.js" afterPath="$PROJECT_DIR$/analysis/JeanAnalysis.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/RogerAnalysis.js" afterPath="$PROJECT_DIR$/analysis/RogerAnalysis.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumer.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHelper.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHolder.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/RemoteConsumerOperations.java" afterPath="$PROJECT_DIR$/src/Consumers/RemoteConsumerOperations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessource.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceHelper.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceHolder.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceOperations.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceOperations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerImplBase.java" afterPath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerImplBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerStub.java" afterPath="$PROJECT_DIR$/src/Consumers/_RemoteConsumerStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_VectorRessourceImplBase.java" afterPath="$PROJECT_DIR$/src/Consumers/_VectorRessourceImplBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/_VectorRessourceStub.java" afterPath="$PROJECT_DIR$/src/Consumers/_VectorRessourceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RemoteProducer.java" afterPath="$PROJECT_DIR$/src/Producers/RemoteProducer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RemoteProducerHelper.java" afterPath="$PROJECT_DIR$/src/Producers/RemoteProducerHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RemoteProducerHolder.java" afterPath="$PROJECT_DIR$/src/Producers/RemoteProducerHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RemoteProducerOperations.java" afterPath="$PROJECT_DIR$/src/Producers/RemoteProducerOperations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RessourceType.java" afterPath="$PROJECT_DIR$/src/Producers/RessourceType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RessourceTypeHelper.java" afterPath="$PROJECT_DIR$/src/Producers/RessourceTypeHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/RessourceTypeHolder.java" afterPath="$PROJECT_DIR$/src/Producers/RessourceTypeHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/_RemoteProducerImplBase.java" afterPath="$PROJECT_DIR$/src/Producers/_RemoteProducerImplBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/_RemoteProducerStub.java" afterPath="$PROJECT_DIR$/src/Producers/_RemoteProducerStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/makefile" afterPath="$PROJECT_DIR$/makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/Consumer.java" afterPath="$PROJECT_DIR$/src/Consumers/Consumer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" afterPath="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Manager/Manager.java" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Producers/Producer.java" afterPath="$PROJECT_DIR$/src/Producers/Producer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,14 +24,71 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Manager/Manager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="76" column="42" lean-forward="false" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="42" />
+            <state relative-caret-position="448">
+              <caret line="135" column="8" lean-forward="false" selection-start-line="135" selection-start-column="8" selection-end-line="138" selection-end-column="9" />
               <folding>
-                <marker date="1494007930673" expanded="true" signature="11982:11988" ph="{...}" />
+                <marker date="1494016654785" expanded="true" signature="13032:13038" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Consumer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Consumers/Consumer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="125" column="8" lean-forward="false" selection-start-line="125" selection-start-column="8" selection-end-line="128" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#494#502#0" expanded="true" />
+                <element signature="e#4797#4805#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VectorRessourceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="505">
+              <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+              <folding>
+                <element signature="e#1567#1568#0" expanded="true" />
+                <element signature="e#1639#1640#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FortuneTeller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2517">
+              <caret line="239" column="48" lean-forward="true" selection-start-line="239" selection-start-column="48" selection-end-line="239" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemoteConsumerImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="825">
+              <caret line="188" column="9" lean-forward="false" selection-start-line="188" selection-start-column="9" selection-end-line="188" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Producer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Producers/Producer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1280">
+              <caret line="89" column="67" lean-forward="false" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,6 +108,8 @@
       <find>Ressource</find>
       <find>Wood</find>
       <find>wood</find>
+      <find>Unable to</find>
+      <find>subtract</find>
     </findStrings>
     <replaceStrings>
       <replace>RemoteProducer</replace>
@@ -101,14 +145,10 @@
         <option value="$PROJECT_DIR$/src/Consumers/ConsumerThread.java" />
         <option value="$PROJECT_DIR$/src/RemoteProducer.idl" />
         <option value="$PROJECT_DIR$/consumers.drg" />
-        <option value="$PROJECT_DIR$/src/Producers/Producer.java" />
         <option value="$PROJECT_DIR$/src/RemoteConsumer.idl" />
         <option value="$PROJECT_DIR$/src/Consumers/FortuneTeller.java" />
         <option value="$PROJECT_DIR$/src/Producers/RemoteProducerImpl.java" />
-        <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" />
-        <option value="$PROJECT_DIR$/src/Manager/Manager.java" />
         <option value="$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java" />
-        <option value="$PROJECT_DIR$/src/Consumers/Consumer.java" />
         <option value="$PROJECT_DIR$/src/Producers/_RemoteProducerImplBase.java" />
         <option value="$PROJECT_DIR$/src/Producers/_RemoteProducerStub.java" />
         <option value="$PROJECT_DIR$/src/Producers/RemoteProducer.java" />
@@ -130,6 +170,10 @@
         <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceHelper.java" />
         <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceHolder.java" />
         <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceOperations.java" />
+        <option value="$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java" />
+        <option value="$PROJECT_DIR$/src/Consumers/Consumer.java" />
+        <option value="$PROJECT_DIR$/src/Manager/Manager.java" />
+        <option value="$PROJECT_DIR$/src/Producers/Producer.java" />
       </list>
     </option>
   </component>
@@ -201,6 +245,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DRG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DRG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Producers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -756,22 +818,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/consumers.drg" />
-    <entry file="file://$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="67" column="63" lean-forward="false" selection-start-line="67" selection-start-column="63" selection-end-line="67" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3648">
-          <caret line="231" column="63" lean-forward="false" selection-start-line="231" selection-start-column="63" selection-end-line="231" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Producers/_RemoteProducerImplBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -854,14 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Producers/Producer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Consumers/_RemoteConsumerImplBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -918,14 +956,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="866">
-          <caret line="151" column="10" lean-forward="false" selection-start-line="151" selection-start-column="10" selection-end-line="151" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Consumers/RemoteConsumerOperations.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -974,25 +1004,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Consumers/VectorRessourceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+          <folding>
+            <element signature="e#1567#1568#0" expanded="true" />
+            <element signature="e#1639#1640#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Consumers/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="544">
+          <caret line="125" column="8" lean-forward="false" selection-start-line="125" selection-start-column="8" selection-end-line="128" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#494#502#0" expanded="true" />
-            <element signature="e#4733#4741#0" expanded="true" />
+            <element signature="e#4797#4805#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Manager/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="76" column="42" lean-forward="false" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="42" />
+        <state relative-caret-position="448">
+          <caret line="135" column="8" lean-forward="false" selection-start-line="135" selection-start-column="8" selection-end-line="138" selection-end-column="9" />
           <folding>
-            <marker date="1494007930673" expanded="true" signature="11982:11988" ph="{...}" />
+            <marker date="1494016654785" expanded="true" signature="13032:13038" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Producers/Producer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1280">
+          <caret line="89" column="67" lean-forward="false" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Consumers/FortuneTeller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2517">
+          <caret line="239" column="48" lean-forward="true" selection-start-line="239" selection-start-column="48" selection-end-line="239" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Consumers/RemoteConsumerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="188" column="9" lean-forward="false" selection-start-line="188" selection-start-column="9" selection-end-line="188" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
