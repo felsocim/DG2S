@@ -7,6 +7,9 @@ import org.apache.commons.cli.*;
 import org.omg.CORBA.*;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Consumer
@@ -269,7 +272,10 @@ public class Consumer
 
                         if((currentTime - lastTime) > 1000)
                         {
-                            analysis.println("{ t: '" + currentTime + "', " + consumer._toString() + "},");
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            Date date = new Date(currentTime);
+
+                            analysis.println("{ t: '" + dateFormat.format(date) + "', " + consumer._toString() + "},");
                             lastTime = currentTime;
                         }
 
@@ -286,7 +292,10 @@ public class Consumer
 
                 currentTime = System.currentTimeMillis();
 
-                analysis.println("{ t: '" + currentTime + "', " + consumer._toString() + "}");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date(currentTime);
+
+                analysis.println("{ t: '" + dateFormat.format(date) + "', " + consumer._toString() + "}");
                 analysis.println("\t],");
                 analysis.println("config = {\n" +
                         "      data: data,\n" +
