@@ -51,7 +51,7 @@ public class VectorRessourceImpl extends _VectorRessourceImplBase
 
     public void subtract(VectorRessource operand)
     {
-        System.out.println("Te be added: W = " + operand.resWood() + ", M = " + operand.resMarble());
+        System.out.println("Te be subtracted: W = " + operand.resWood() + ", M = " + operand.resMarble());
 
         this.resWood -= operand.resWood();
         this.resMarble -= operand.resMarble();

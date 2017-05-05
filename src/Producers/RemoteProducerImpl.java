@@ -99,8 +99,11 @@ public class RemoteProducerImpl extends _RemoteProducerImplBase {
 
         if (toBeAcquired > this.count)
         {
-            toBeAcquired = this.count;
+            System.out.println("acquire: " + units + " wanted, 0 actually acquired, " + this.count + " remaining");
+            return 0;
         }
+
+
 
         this.count -= toBeAcquired;
 

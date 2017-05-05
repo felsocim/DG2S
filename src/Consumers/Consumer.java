@@ -91,7 +91,7 @@ public class Consumer
 
         if(commandLine.hasOption("tm"))
         {
-            tgWood = Integer.parseInt(commandLine.getOptionValue("tm"));
+            tgMarble = Integer.parseInt(commandLine.getOptionValue("tm"));
         }
 
         if(commandLine.hasOption("c"))

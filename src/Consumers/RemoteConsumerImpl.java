@@ -149,12 +149,15 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized boolean stole (VectorRessource toStole, RemoteConsumer thief)
     {
-        if(!this.resCurrent().compare(toStole))
+        System.out.println("Someone wants to stole me!");
+        if((this.resCurrent.resWood() >= toStole.resWood() && this.resCurrent.resMarble() >= toStole.resMarble()) && !this.gameOver)
         {
-            this.resCurrent().subtract(toStole);
+            this.resCurrent.subtract(toStole);
             this.resStolen.setAll(toStole.resWood(), toStole.resMarble());
             this.thief = thief;
             this.stolen = true;
+
+            System.out.println("I just got stolen: " + this.resStolen._toString() + " (remaining: " + this.resCurrent._toString() + ")");
 
             return true;
         }
@@ -164,7 +167,7 @@ public class RemoteConsumerImpl extends _RemoteConsumerImplBase
 
     public synchronized boolean finished ()
     {
-        if(this.resTarget().compare(this.resCurrent) || this.gameOver)
+        if(this.resTarget.compare(this.resCurrent) || this.gameOver)
         {
             this.gameOver = true;
             if(this.timeFinished == 0) this.timeFinished = System.nanoTime();

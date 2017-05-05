@@ -3,17 +3,21 @@ package Consumers;
 import Producers.RemoteProducer;
 import Producers.RessourceType;
 
+import java.util.Random;
+
 public class FortuneTeller
 {
     private char personality;
     private boolean human;
     private RessourceType last;
+    private Random random;
 
     public FortuneTeller(char personality, boolean human)
     {
         this.personality = personality;
         this.human = human;
         this.last = RessourceType.WOOD;
+        this.random = new Random();
     }
 
     public void getFortune(RemoteConsumerImpl localConsumer, RemoteConsumer[] remoteConsumers, RemoteProducer[] woodProducers, RemoteProducer[] marbleProducers, VectorRessourceImpl humanRes)
@@ -28,8 +32,6 @@ public class FortuneTeller
 
         int unitsWood = localConsumer.resTarget().resWood() - localConsumer.resCurrent().resWood();
         int unitsMarble = localConsumer.resTarget().resMarble() - localConsumer.resCurrent().resMarble();
-
-        //System.out.println("Units " + unitsWood + " -- " + unitsMarble);
 
         if(this.human)
         {
@@ -72,12 +74,32 @@ public class FortuneTeller
                 {
                     if(avgWood > localConsumer.resCurrent().resWood())
                     {
-                        acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                        int local = this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood);
+
+                        if(local < 1)
+                        {
+                            if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(unitsWood, 0), localConsumer))
+                            {
+                                local = unitsWood;
+                            }
+                        }
+
+                        acquired.setWood(local);
                     }
 
                     if(avgMarble > localConsumer.resCurrent().resMarble())
                     {
-                        acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                        int local = this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble);
+
+                        if(local < 1)
+                        {
+                            if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(0, unitsMarble), localConsumer))
+                            {
+                                local = unitsMarble;
+                            }
+                        }
+
+                        acquired.setMarble(local);
                     }
                 }
                 else
@@ -86,23 +108,64 @@ public class FortuneTeller
                     {
                         if(unitsWood > 0)
                         {
-                            acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                            int local = this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood);
+
+                            if(local < 1)
+                            {
+                                if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(unitsWood, 0), localConsumer))
+                                {
+                                    local = unitsWood;
+                                }
+                            }
+
+                            acquired.setWood(local);
                         }
                         else
                         {
-                            acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                            int local = this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble);
+
+                            if(local < 1)
+                            {
+                                if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(0, unitsMarble), localConsumer))
+                                {
+                                    local = unitsMarble;
+                                }
+                            }
+
+                            acquired.setMarble(local);
                         }
                     }
                     else
                     {
                         if(this.last == RessourceType.WOOD && unitsMarble > 0)
                         {
-                            acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                            int local = this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble);
+
+                            if(local < 1)
+                            {
+                                if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(0, unitsMarble), localConsumer))
+                                {
+                                    local = unitsMarble;
+                                }
+                            }
+
+                            acquired.setMarble(local);
                             this.last = RessourceType.MARBLE;
                         }
                         else
                         {
-                            acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                            int local = this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood);
+
+                            if(local < 1)
+                            {
+                                if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(unitsWood, 0), localConsumer))
+                                {
+                                    local = unitsWood;
+                                }
+                            }
+
+                            acquired.setWood(local);
+
                             this.last = RessourceType.WOOD;
                         }
                     }
@@ -114,23 +177,67 @@ public class FortuneTeller
                 {
                     if(unitsWood > 0)
                     {
-                        acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                        int local = this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood);
+
+                        //System.out.println("Acquired: " + local);
+
+                        if(local < 1 && remoteConsumers != null)
+                        {
+
+
+                            if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(unitsWood, 0), localConsumer))
+                            {
+                                local = unitsWood;
+                            }
+                        }
+
+                        acquired.setWood(local);
                     }
                     else
                     {
-                        acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                        int local = this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble);
+
+                        if(local < 1 && remoteConsumers != null)
+                        {
+                            if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(0, unitsMarble), localConsumer))
+                            {
+                                local = unitsMarble;
+                            }
+                        }
+
+                        acquired.setMarble(local);
                     }
                 }
                 else
                 {
                     if(this.last == RessourceType.WOOD && unitsMarble > 0)
                     {
-                        acquired.setMarble(this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble));
+                        int local = this.acquireMarble(marbleProducers, marbleUnitsPerProducer, unitsMarble);
+
+                        if(local < 1 && remoteConsumers != null)
+                        {
+                            if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(0, unitsMarble), localConsumer))
+                            {
+                                local = unitsMarble;
+                            }
+                        }
+
+                        acquired.setMarble(local);
                         this.last = RessourceType.MARBLE;
                     }
                     else
                     {
-                        acquired.setWood(this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood));
+                        int local = this.acquireWood(woodProducers, woodUnitsPerProducer, unitsWood);
+
+                        if(local < 1 && remoteConsumers != null)
+                        {
+                            if(remoteConsumers[this.random.nextInt(remoteConsumers.length)].stole(new VectorRessourceImpl(unitsWood, 0), localConsumer))
+                            {
+                                local = unitsWood;
+                            }
+                        }
+
+                        acquired.setWood(local);
                         this.last = RessourceType.WOOD;
                     }
                 }
